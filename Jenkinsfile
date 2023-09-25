@@ -13,7 +13,7 @@ pipeline {
         stage('checkout') {
             steps {
                  script{
-#                        dir("TerraformRepo")
+                        dir("Terraform pipeline")
                         {
                             git "https://github.com/vnari11/TerraformRepo.git"
                         }
