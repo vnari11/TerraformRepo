@@ -13,7 +13,7 @@ pipeline {
         stage('checkout') {
             steps {
                  script{
-                        dir("terraform")
+                        dir("TerraformRepo")
                         {
                             git "https://github.com/vnari11/TerraformRepo.git"
                         }
@@ -23,9 +23,9 @@ pipeline {
 
         stage('Plan') {
             steps {
-                sh 'pwd;cd terraform/ ; terraform init'
-                sh "pwd;cd terraform/ ; terraform plan -out tfplan"
-                sh 'pwd;cd terraform/ ; terraform show -no-color tfplan > tfplan.txt'
+                sh 'pwd;cd TerraformRepo/ ; terraform init'
+                sh "pwd;cd TerraformRepo/ ; terraform plan -out tfplan"
+                sh 'pwd;cd TerraformRepo/ ; terraform show -no-color tfplan > tfplan.txt'
             }
         }
         stage('Approval') {
@@ -46,7 +46,7 @@ pipeline {
 
         stage('Apply') {
             steps {
-                sh "pwd;cd terraform/ ; terraform apply -input=false tfplan"
+                sh "pwd;cd TerraformRepo/ ; terraform apply -input=false tfplan"
             }
         }
     }
